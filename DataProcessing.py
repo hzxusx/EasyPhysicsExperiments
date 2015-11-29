@@ -53,14 +53,14 @@ class DataProcessing:
             sqrt_diff+=(self.data[i]-avg_data)**2
         return (sqrt_diff/(len(self.data)-1))**0.5
         
-    def u_a(self):
-        t_p = {3:4.30, 4:3.18, 5:2.78, 6:2.57, 7:2.46, 8:2.37, 9:2.31, 10:2.26, 15:2.15, 20:2.09}
-        print('t_p = {0}'.format(t_p[len(self.data)]))      
+    def u_a(self,t_p=True):
+        if t_p:        
+            print('t_p = {0}'.format(DataProcessing.t_p[len(self.data)]))      
         return self.sigma()/len(self.data)**0.5        
         
     def u_p(self,u_b):
         if u_b is not None:
-            return ((t_p[len(self.data)]*self.u_a())**2+(1.96*u_b)**2)**0.5
+            return ((DataProcessing.t_p[len(self.data)]*self.u_a(False))**2+(1.96*u_b)**2)**0.5
         else:
             print('missing u_b')
     
